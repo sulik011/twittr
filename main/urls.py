@@ -19,11 +19,15 @@ from rest_framework.routers import SimpleRouter
 from posts import views
 router = SimpleRouter()
 
-router.register('postlist', views.PostAPIView)
+router.register('api/posts', views.PostAPIView)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('user.urls')),
     path('', include('posts.urls'))
+
 ]
 
 urlpatterns += router.urls
