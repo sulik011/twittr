@@ -15,8 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import SimpleRouter
+from posts import views
+router = SimpleRouter()
+
+router.register('api/posts', views.PostAPIView)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('user.urls'))
+    path('api/', include('user.urls')),
+    path('', include('posts.urls'))
+
 ]
+
+urlpatterns += router.urls
