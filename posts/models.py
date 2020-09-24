@@ -10,6 +10,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return self.body
 
@@ -36,7 +37,7 @@ class Comment(models.Model):
     active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created', )
+        ordering = ('-created', )
 
     def __str__(self):
         return f"Comment by {self.author} on {self.post}"
