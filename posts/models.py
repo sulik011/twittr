@@ -9,7 +9,7 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
+    image = models.ImageField(default=None, null=True)
 
     def __str__(self):
         return self.body
