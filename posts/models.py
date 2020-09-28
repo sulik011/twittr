@@ -1,9 +1,23 @@
+from django.db.models import Q
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+
+class ArticleManager(models.Manager):
+    use_for_related_fields = True
+
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query:
+            or_lookup = (Q(title__icontains=query) | Q(content__icontains=query))
+            qs = qs.filter(or_lookup)
+
+        return qs
+
 class Post(models.Model):
+    objects = ArticleManager()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.CharField(max_length=80)
     publish = models.DateTimeField(default=timezone.now)
