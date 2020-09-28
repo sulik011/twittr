@@ -34,7 +34,6 @@ class PostAPIView(viewsets.ModelViewSet):
 
     def post(self, request):
         article = request.data.get('article')
-        # print(type('type', article))
         serializer = PostSerializer(data=article)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
